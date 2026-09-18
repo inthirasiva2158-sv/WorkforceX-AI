@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkforceX AI | Right Person. Right Task. Right Time.</title>
+    <!-- Google Fonts: Outfit (Clean UI) & JetBrains Mono (Telemetry) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-layout">
+        
+        <!-- SIDEBAR (~250px Fixed Navigation) -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="logo-badge">
+                        <span class="logo-glow"></span>
+                        <span class="logo-mark">WX</span>
+                    </div>
+                    <div class="brand-info">
+                        <h1 class="brand-title">Workforce<span class="brand-accent">X</span></h1>
+                        <span class="brand-sub">AI PLATFORM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Navigation Links -->
+            <nav class="sidebar-nav">
+                <button class="nav-link active" data-tab="tab-command-center">
+                    <span class="nav-icon">⌂</span>
+                    <span class="nav-label">Dashboard</span>
+                </button>
+                <button class="nav-link" data-tab="tab-workforce">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-label">Workforce</span>
+                </button>
+                <button class="nav-link" data-tab="tab-tasks">
+                    <span class="nav-icon">✓</span>
+                    <span class="nav-label">Tasks</span>
+                </button>
+                <button class="nav-link" data-tab="tab-reallocation-matrix">
+                    <span class="nav-icon">⇄</span>
+                    <span class="nav-label">Allocations</span>
+                    <span class="nav-badge-pulse">LIVE</span>
+                </button>
+                <button class="nav-link" data-tab="tab-analytics">
+                    <span class="nav-icon">◉</span>
+                    <span class="nav-label">AI Insights</span>
+                </button>
+                <button class="nav-link" data-tab="tab-chaos-mode">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-label">Chaos Mode</span>
+                </button>
+                <button class="nav-link" data-tab="tab-activity">
+                    <span class="nav-icon">▤</span>
+                    <span class="nav-label">Activity</span>
+                </button>
+            </nav>
+
+            <!-- Bottom Sidebar Engine Status -->
+            <div class="sidebar-footer">
+                <div class="ai-status-card">
+                    <div class="status-header-row">
+                        <span class="status-label-title">AI ENGINE</span>
+                        <span class="status-badge-live">
+                            <span class="pulse-dot"></span> Operational
+                        </span>
+                    </div>
+                    <p class="status-description">Optimization engine running</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN WRAPPER CONTAINER -->
+        <div class="main-wrapper">
+            
+            <!-- TOP HEADER -->
+            <header class="top-header">
+                <!-- Left: Global Search Input -->
+                <div class="header-search">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="global-search-input" placeholder="Search tasks, workforce skills, or AI telemetry...">
+                    <kbd class="kbd-shortcut">⌘K</kbd>
+                </div>
+
+                <!-- Center: Operational Status Indicator -->
+                <div class="header-status-pill">
+                    <span class="status-beacon active"></span>
+                    <div class="status-text-wrap">
+                        <span class="status-main">AI MATCH ENGINE: ACTIVE</span>
+                        <span class="status-sub">99.6% SLA Match | Latency: 0.38s</span>
+                    </div>
+                </div>
+
+                <!-- Right: Quick Action Deck -->
+                <div class="header-actions">
+                    <button class="btn btn-primary glow-indigo" id="btn-trigger-reallocate">
+                        ⚡ Auto-Reallocate Run
+                    </button>
+                    <button class="btn btn-warning" id="btn-sim-absence">
+                        🤒 Simulate Absence
+                    </button>
+                    <button class="btn btn-danger" id="btn-sim-incident">
+                        🚨 Inject P0 Incident
+                    </button>
+                    <button class="btn btn-secondary" id="btn-open-add-task">
+                        + Task
+                    </button>
+
+                    <div class="header-divider"></div>
+
+                    <!-- User Profile Dropdown Badge -->
+                    <div class="user-profile">
+                        <div class="user-avatar">OD</div>
+                        <div class="user-meta">
+                            <span class="user-name">Alex Rivera</span>
+                            <span class="user-role">Ops Director</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- MAIN CONTENT DISPLAY AREA -->
+            <main class="main-content">
+                <div class="content-container">
+
+                    <!-- KPI METRICS BANNER -->
+                    <section class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-icon-wrap icon-cyan">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            </div>
+                            <div class="kpi-info">
+                                <span class="kpi-label">Workforce Capacity</span>
+                                <div class="kpi-val-row">
+                                    <span class="kpi-val" id="kpi-capacity-val">78%</span>
+                                    <span class="kpi-tag positive">Optimal</span>
+                                </div>
+                                <div class="kpi-progress"><div class="kpi-fill fill-cyan" id="kpi-capacity-fill" style="width: 78%;"></div></div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon-wrap icon-indigo">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                            </div>
+                            <div class="kpi-info">
+                                <span class="kpi-label">Active Task Allocations</span>
+                                <div class="kpi-val-row">
+                                    <span class="kpi-val" id="kpi-tasks-val">24 Active</span>
+                                    <span class="kpi-tag neutral" id="kpi-unassigned-tag">3 Pending Match</span>
+                                </div>
+                                <div class="kpi-sub">100% Skill Vector Matched</div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon-wrap icon-amber">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                            </div>
+                            <div class="kpi-info">
+                                <span class="kpi-label">Dynamic Reallocations (24h)</span>
+                                <div class="kpi-val-row">
+                                    <span class="kpi-val" id="kpi-reallocs-val">12 Auto-Shifted</span>
+                                    <span class="kpi-tag highlight">+4 Saved SLAs</span>
+                                </div>
+                                <div class="kpi-sub">Avg Time Saved: 3.4 hrs / task</div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon-wrap icon-emerald">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </div>
+                            <div class="kpi-info">
+                                <span class="kpi-label">AI Optimization Accuracy</span>
+                                <div class="kpi-val-row">
+                                    <span class="kpi-val" id="kpi-accuracy-val">98.9%</span>
+                                    <span class="kpi-tag positive">High Confidence</span>
+                                </div>
+                                <div class="kpi-sub">Zero Skill Mismatch Conflicts</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- TAB 1: DASHBOARD (COMMAND CENTER) -->
+                    <div class="tab-pane active" id="tab-command-center">
+                        <div class="dashboard-grid">
+                            
+                            <!-- Left: Real-Time Workforce Load Heatmap -->
+                            <div class="ui-card panel-capacity">
+                                <div class="card-header">
+                                    <h3>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                                        Real-Time Workforce Load Heatmap
+                                    </h3>
+                                    <span class="pill-badge" id="workforce-count-badge">8 Staff Active</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="resource-heatmap-list" id="command-resource-list">
+                                        <!-- JS Dynamic Heatmap -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Center: Priority Task Pipeline & SLA Countdown -->
+                            <div class="ui-card panel-allocations">
+                                <div class="card-header">
+                                    <h3>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                        Priority Task Pipeline & SLA Countdown
+                                    </h3>
+                                    <button class="btn-text" id="btn-view-all-tasks">View Pipeline &rarr;</button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="priority-task-list" id="command-task-list">
+                                        <!-- JS Dynamic Task List -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Live AI Telemetry Terminal -->
+                            <div class="ui-card panel-terminal">
+                                <div class="card-header">
+                                    <h3>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                                        Live AI Telemetry Logs
+                                    </h3>
+                                    <span class="live-recording-tag">REC</span>
+                                </div>
+                                <div class="card-body terminal-body">
+                                    <div class="terminal-feed" id="terminal-feed">
+                                        <div class="log-line system">[18:45:00] WorkforceX AI Engine initialized. Vector Embeddings model active.</div>
+                                        <div class="log-line success">[18:45:01] Real-Time Capacity Monitoring Active. 8 workforce nodes connected.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: WORKFORCE DIRECTORY -->
+                    <div class="tab-pane" id="tab-workforce">
+                        <div class="directory-layout">
+                            <!-- Search & Filter Bar -->
+                            <div class="ui-card filter-toolbar">
+                                <div class="search-box">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                    <input type="text" id="employee-search-input" placeholder="Search by name, role, or skills (e.g. Python, Cloud, Security)...">
+                                </div>
+                                
+                                <div class="filter-pills" id="skill-filter-pills">
+                                    <button class="pill active" data-filter="all">All Staff</button>
+                                    <button class="pill" data-filter="Available">Available</button>
+                                    <button class="pill" data-filter="Busy">High Load (>80%)</button>
+                                    <button class="pill" data-filter="On Leave">On Leave</button>
+                                    <button class="pill" data-filter="Cloud Architecture">Cloud</button>
+                                    <button class="pill" data-filter="AI/ML">AI / ML</button>
+                                    <button class="pill" data-filter="Cyber Security">Security</button>
+                                </div>
+
+                                <button class="btn btn-secondary" id="btn-open-add-emp">
+                                    + Add Employee
+                                </button>
+                            </div>
+
+                            <!-- Employee Cards Grid -->
+                            <div class="workforce-grid" id="workforce-grid">
+                                <!-- JS Injection -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: TASK PIPELINE (KANBAN) -->
+                    <div class="tab-pane" id="tab-tasks">
+                        <div class="pipeline-layout">
+                            <div class="pipeline-toolbar">
+                                <h2>Task Pipeline & SLA Allocation Deck</h2>
+                                <div class="toolbar-actions">
+                                    <button class="btn btn-secondary" id="btn-trigger-all-autoassign">
+                                        ⚡ AI Auto-Assign All Pending
+                                    </button>
+                                    <button class="btn btn-primary glow-indigo" id="btn-open-add-task-2">
+                                        + Create New Task
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="kanban-board">
+                                <!-- Column 1: Unassigned -->
+                                <div class="kanban-col">
+                                    <div class="col-header bg-amber">
+                                        <h3>Pending AI Allocation</h3>
+                                        <span class="col-count" id="count-unassigned">0</span>
+                                    </div>
+                                    <div class="col-body" id="col-unassigned"></div>
+                                </div>
+
+                                <!-- Column 2: Reallocating -->
+                                <div class="kanban-col">
+                                    <div class="col-header bg-indigo">
+                                        <h3>Dynamic Reassigning</h3>
+                                        <span class="col-count" id="count-reallocating">0</span>
+                                    </div>
+                                    <div class="col-body" id="col-reallocating"></div>
+                                </div>
+
+                                <!-- Column 3: In Progress -->
+                                <div class="kanban-col">
+                                    <div class="col-header bg-cyan">
+                                        <h3>In Progress</h3>
+                                        <span class="col-count" id="count-in-progress">0</span>
+                                    </div>
+                                    <div class="col-body" id="col-in-progress"></div>
+                                </div>
+
+                                <!-- Column 4: Completed -->
+                                <div class="kanban-col">
+                                    <div class="col-header bg-emerald">
+                                        <h3>Completed / Verified</h3>
+                                        <span class="col-count" id="count-completed">0</span>
+                                    </div>
+                                    <div class="col-body" id="col-completed"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 4: DYNAMIC REALLOCATION MATRIX -->
+                    <div class="tab-pane" id="tab-reallocation-matrix">
+                        <div class="reallocation-layout">
+                            <!-- Scenario Control Deck -->
+                            <div class="ui-card scenario-bar">
+                                <div class="scenario-title">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                    <div>
+                                        <h2>Dynamic AI Reallocation Simulator</h2>
+                                        <p>Simulate workforce disruptions and observe AI auto-reassigning tasks in real-time based on skill vectors, SLA deadlines, and capacity.</p>
+                                    </div>
+                                </div>
+
+                                <div class="scenario-controls">
+                                    <span class="control-label">Hackathon Preset Scenarios:</span>
+                                    <button class="btn btn-outline glow-amber" id="scen-absence">
+                                        🤒 Lead Architect Sick Leave
+                                    </button>
+                                    <button class="btn btn-outline glow-rose" id="scen-p0">
+                                        🚨 P0 Cyber Incident Spike
+                                    </button>
+                                    <button class="btn btn-outline glow-cyan" id="scen-workload">
+                                        ⚖️ Re-balance Overloaded Team
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Interactive 3-Node Flow Visualizer -->
+                            <div class="reallocate-flow-grid">
+                                <!-- Node 1: Disruption Event -->
+                                <div class="ui-card node-box source-node">
+                                    <div class="node-header border-danger">
+                                        <span class="node-badge danger">DISRUPTION EVENT</span>
+                                        <h3 id="realloc-event-title">Select or Trigger Simulation</h3>
+                                    </div>
+                                    <div class="node-content" id="realloc-source-details">
+                                        <div class="empty-state">
+                                            <p>Click any button above or in the top header to trigger an AI reallocation sequence.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Node 2: AI Engine Matrix Hub -->
+                                <div class="ui-card node-box ai-engine-hub">
+                                    <div class="hub-core">
+                                        <div class="core-ring"></div>
+                                        <div class="core-pulse"></div>
+                                        <div class="hub-icon">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                        </div>
+                                        <span class="hub-title">WorkforceX AI Matrix</span>
+                                        <span class="hub-subtitle" id="hub-status-text">Ready for Simulation</span>
+                                    </div>
+                                    
+                                    <div class="ai-vector-box" id="ai-vector-matching-box">
+                                        <div class="vector-row">
+                                            <span>Skill Vector Similarity:</span>
+                                            <span class="v-val" id="vec-skill">--</span>
+                                        </div>
+                                        <div class="vector-row">
+                                            <span>Workload Headroom Score:</span>
+                                            <span class="v-val" id="vec-capacity">--</span>
+                                        </div>
+                                        <div class="vector-row">
+                                            <span>SLA Risk Mitigation Index:</span>
+                                            <span class="v-val" id="vec-sla">--</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Node 3: Reallocated Target Assignee -->
+                                <div class="ui-card node-box target-node">
+                                    <div class="node-header border-success">
+                                        <span class="node-badge success">OPTIMAL TARGET ASSIGNEE</span>
+                                        <h3 id="realloc-target-title">AI Assigned Employee</h3>
+                                    </div>
+                                    <div class="node-content" id="realloc-target-details">
+                                        <div class="empty-state">
+                                            <p>Awaiting simulation calculation...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Explainable AI (XAI) Timeline & Log -->
+                            <div class="ui-card xai-section">
+                                <div class="card-header">
+                                    <h3>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                                        Explainable AI (XAI) Reallocation Log & Decision Tree
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="xai-timeline" id="xai-realloc-timeline">
+                                        <div class="timeline-item info">
+                                            <span class="time-stamp">SYSTEM READY</span>
+                                            <div class="timeline-body">
+                                                <strong>WorkforceX Dynamic Allocator Initialized</strong>
+                                                <p>The platform constantly computes optimal employee-task vectors. Trigger an emergency or task arrival to view step-by-step XAI rationale.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- TAB 5: AI INSIGHTS & ANALYTICS -->
+                    <div class="tab-pane" id="tab-analytics">
+                        <div class="analytics-grid">
+                            <!-- Chart 1: Workload vs Capacity -->
+                            <div class="ui-card chart-card">
+                                <div class="card-header">
+                                    <h3>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                        Employee Workload vs Max Capacity Distribution
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="canvas-wrapper">
+                                        <canvas id="chart-workload" height="250"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Chart 2: SLA Breach Risk Mitigation -->
+                            <div class="ui-card chart-card">
+                                <div class="card-header">
+                                    <h3>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                                        SLA Breach Risk Mitigation (Manual vs WorkforceX AI)
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="canvas-wrapper">
+                                        <canvas id="chart-sla-mitigation" height="250"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Skill Vector Matrix -->
+                            <div class="ui-card chart-card full-width">
+                                <div class="card-header">
+                                    <h3>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                        Enterprise Skill Vector Demand vs Active Capacity Matrix
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="skill-matrix-grid" id="skill-matrix-grid">
+                                        <!-- JS Dynamic Skill Grid -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 6: CHAOS MODE (HACKATHON SIMULATION ROOM) -->
+                    <div class="tab-pane" id="tab-chaos-mode">
+                        <div class="chaos-layout">
+                            <div class="ui-card chaos-header-card">
+                                <div class="chaos-title-box">
+                                    <span class="chaos-badge">⚡ RESILIENCE TESTING CHAMBER</span>
+                                    <h2>Workforce Chaos Engineering Sandbox</h2>
+                                    <p>Inject real-time operational disruptions to pressure-test WorkforceX AI's dynamic re-balancing latency and SLA fault tolerance.</p>
+                                </div>
+                            </div>
+
+                            <!-- Chaos Action Deck -->
+                            <div class="chaos-controls-grid">
+                                <div class="ui-card chaos-card">
+                                    <div class="chaos-icon-header">💥</div>
+                                    <h3>Mass Team Outage</h3>
+                                    <p>Simulate 3 senior engineers taking unexpected emergency leave simultaneously.</p>
+                                    <button class="btn btn-danger btn-block" id="btn-chaos-outage">Inject Team Outage</button>
+                                </div>
+
+                                <div class="ui-card chaos-card">
+                                    <div class="chaos-icon-header">⚡</div>
+                                    <h3>Spike P0 Tasks (+300%)</h3>
+                                    <p>Flood task queue with 5 critical P0 incidents requiring instant skill matching.</p>
+                                    <button class="btn btn-warning btn-block" id="btn-chaos-spike">Inject P0 Spike</button>
+                                </div>
+
+                                <div class="ui-card chaos-card">
+                                    <div class="chaos-icon-header">📉</div>
+                                    <h3>SLA Deadline Crunch</h3>
+                                    <p>Slash remaining SLA hours by 50% across all active deliverables.</p>
+                                    <button class="btn btn-primary glow-indigo btn-block" id="btn-chaos-crunch">Crunch SLA Timers</button>
+                                </div>
+
+                                <div class="ui-card chaos-card">
+                                    <div class="chaos-icon-header">🔄</div>
+                                    <h3>Reset Chaos Sandbox</h3>
+                                    <p>Clear simulated outages and return workforce allocation grid to baseline state.</p>
+                                    <button class="btn btn-secondary btn-block" id="btn-chaos-reset">Reset Baseline</button>
+                                </div>
+                            </div>
+
+                            <!-- Real-time Chaos Telemetry Panel -->
+                            <div class="ui-card chaos-metrics-panel">
+                                <div class="card-header">
+                                    <h3>System Resilience & Chaos Telemetry</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chaos-metrics-grid">
+                                        <div class="metric-box">
+                                            <span>System Stress Index</span>
+                                            <strong id="stress-index-val" style="color: var(--emerald);">NORMAL (12%)</strong>
+                                        </div>
+                                        <div class="metric-box">
+                                            <span>Auto-Recovery Latency</span>
+                                            <strong id="recovery-latency-val" style="color: var(--cyan);">0.28s</strong>
+                                        </div>
+                                        <div class="metric-box">
+                                            <span>SLA Protection Rate</span>
+                                            <strong id="protection-rate-val" style="color: var(--emerald);">100%</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 7: ACTIVITY & AUDIT TRAIL LOG -->
+                    <div class="tab-pane" id="tab-activity">
+                        <div class="activity-layout">
+                            <div class="ui-card filter-toolbar">
+                                <div class="search-box">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                    <input type="text" id="activity-search-input" placeholder="Filter audit trail by action or keywords...">
+                                </div>
+                                <div class="filter-pills" id="activity-filter-pills">
+                                    <button class="pill active" data-actfilter="all">All Events</button>
+                                    <button class="pill" data-actfilter="reallocation">Reallocations</button>
+                                    <button class="pill" data-actfilter="incident">Incidents</button>
+                                    <button class="pill" data-actfilter="absence">Absences</button>
+                                </div>
+                            </div>
+
+                            <div class="ui-card activity-card">
+                                <div class="card-header">
+                                    <h3>AI Governance & Human-in-the-Loop Audit Log</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="activity-feed-list" id="activity-feed-list">
+                                        <!-- JS Dynamic Feed -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- MODAL 1: ADD TASK MODAL -->
+    <div class="modal-backdrop" id="modal-add-task">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>+ Create New Workforce Task</h3>
+                <button class="btn-close" modal-close>&times;</button>
+            </div>
+            <form id="form-add-task">
+                <div class="form-group">
+                    <label>Task Title / Deliverable Name</label>
+                    <input type="text" id="task-title" required placeholder="e.g. Deploy LLM Inference Microservice">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Priority Level</label>
+                        <select id="task-priority">
+                            <option value="P0">P0 - Critical Incident</option>
+                            <option value="P1" selected>P1 - High Priority</option>
+                            <option value="P2">P2 - Standard Business</option>
+                            <option value="P3">P3 - Low Priority</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>SLA Deadline (Hours)</label>
+                        <input type="number" id="task-sla" value="8" min="1" max="168">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Required Skill Vectors (Select multiple)</label>
+                    <div class="skill-select-tags" id="task-skills-picker">
+                        <label class="tag-checkbox"><input type="checkbox" value="Python" checked> Python</label>
+                        <label class="tag-checkbox"><input type="checkbox" value="AI/ML" checked> AI/ML</label>
+                        <label class="tag-checkbox"><input type="checkbox" value="Cloud Architecture"> Cloud Architecture</label>
+                        <label class="tag-checkbox"><input type="checkbox" value="Kubernetes"> Kubernetes</label>
+                        <label class="tag-checkbox"><input type="checkbox" value="Cyber Security"> Cyber Security</label>
+                        <label class="tag-checkbox"><input type="checkbox" value="UI/UX Design"> UI/UX Design</label>
+                        <label class="tag-checkbox"><input type="checkbox" value="Frontend JS"> Frontend JS</label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" modal-close>Cancel</button>
+                    <button type="submit" class="btn btn-primary glow-indigo">Create & Run AI Auto-Allocation</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: ADD EMPLOYEE MODAL -->
+    <div class="modal-backdrop" id="modal-add-emp">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>+ Onboard New Workforce Member</h3>
+                <button class="btn-close" modal-close>&times;</button>
+            </div>
+            <form id="form-add-emp">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="emp-name" required placeholder="e.g. Dr. Maya Patel">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Primary Role Title</label>
+                        <input type="text" id="emp-role" required placeholder="e.g. Senior Security Architect">
+                    </div>
+                    <div class="form-group">
+                        <label>Max Weekly Capacity (Hours)</label>
+                        <input type="number" id="emp-max-hours" value="40" min="10" max="60">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Skill Competencies (Comma separated)</label>
+                    <input type="text" id="emp-skills" placeholder="e.g. Cyber Security, Cloud Architecture, Kubernetes" required>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" modal-close>Cancel</button>
+                    <button type="submit" class="btn btn-primary glow-indigo">Add to Workforce Grid</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: EXPLAINABLE AI DETAIL MODAL -->
+    <div class="modal-backdrop" id="modal-xai-details">
+        <div class="modal-box modal-lg">
+            <div class="modal-header">
+                <h3>🧠 AI Allocation Reasoning & Match Vector Matrix</h3>
+                <button class="btn-close" modal-close>&times;</button>
+            </div>
+            <div class="modal-body-content" id="xai-modal-content">
+                <!-- Dynamic Content -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" modal-close>Acknowledge AI Decision</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
